@@ -1,0 +1,22 @@
+{
+  "name": "tumarvillage",
+  "description": "tumarvillage",
+  "main": "libs",
+  "license": "MIT",
+  "homepage": "https://github.com/vszeuszeus/tumarvillage",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "materialize": "^0.100.1",
+    "photoswipe": "^4.1.2",
+    "wow": "^1.1.2",
+    "scrollup": "^2.4.1",
+    "animate.css": "^3.5.2"
+  }
+}
