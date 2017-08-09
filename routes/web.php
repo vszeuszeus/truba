@@ -10,12 +10,32 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Tovar_category;
+use App\Service_category;
 
 Route::get('/', function () {
     return view('pages.mainpage');
 });
 
-Route::get('/products', 'TovarController@index');
+Route::get('/products', 'ProductController@index');
+
+Route::get('/products/{tovar_category}', 'ProductController@index_category');
+
+Route::get('/products/{tovar_category}/{tovar_podcategory}', 'ProductController@index_podcategory');
+
+Route::get('/products/{tovar_category}/{tovar_podcategory}/{tovar}', 'ProductController@index_tovar');
+
+
+
+Route::get('/services', 'ServiceController@index');
+
+Route::get('/services/{service_category}', 'ProductController@index_category');
+
+Route::get('/services/{service_category}/{service}', 'ProductController@index_service');
+
+
+
+
 
 Route::post('/sent_request', 'UserRequestsController@add');
 

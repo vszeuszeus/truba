@@ -15,6 +15,9 @@ class CreateTovarCategorTable extends Migration
     {
         Schema::create('tovar_categories', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 255);
+            $table->string('name_eng', 255);
+            $table->string('description', 3000);
             $table->timestamps();
         });
     }

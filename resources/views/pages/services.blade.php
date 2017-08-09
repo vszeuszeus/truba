@@ -24,19 +24,12 @@
                 <h6>Категории товаров</h6>
                 <nav class="sdb_holder">
                     <ul>
-                        @foreach($categories as $category)
-                            <li><a href="{{url('/products/'.$category->id)}}">{{$category->name}}</a>
-                                @if(count($category->tovar_podcategories))
+                        @foreach($category_serv as $category)
+                            <li><a href="{{url('/services/'.$category->id)}}">{{$category->name}}</a>
+                                @if(count($category->services))
                                     <ul>
-                                        @foreach($category->tovar_podcategories as $podcategory)
-                                            <li><a href="{{url('/products/'.$category->id.'/'.$podcategory->id)}}">{{$podcategory->name}}</a>
-                                                @if(count($podcategory->tovars))
-                                                    <ul>
-                                                        @foreach($podcategory->tovars as $tovar)
-                                                        <li><a href="{{url('/products/'.$category->id.'/'.$podcategory->id.'/'.$tovar->id)}}">{{$tovar->name}}</a></li>
-                                                        @endforeach
-                                                    </ul>
-                                                @endif
+                                        @foreach($category->services as $service)
+                                            <li><a href="{{url('/products/'.$category->id.'/'.$service->id)}}">{{$service->name}}</a>
                                             </li>
                                         @endforeach
                                     </ul>

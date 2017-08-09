@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTovarPodcategorTable extends Migration
+class CreateTovarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateTovarPodcategorTable extends Migration
      */
     public function up()
     {
-        Schema::create('tovar_podcategories', function (Blueprint $table) {
+        Schema::create('tovars', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
             $table->string('name_eng', 255);
+            $table->string('path', 255);
             $table->string('description', 3000);
-            $table->integer('tovar_category_id')->unsigned();
-            $table->foreign('tovar_category_id')->references('id')->on('tovar_categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('tovar_podcategory_id')->unsigned();
+            $table->foreign('tovar_podcategory_id')->references('id')->on('tovar_podcategories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateTovarPodcategorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tovar_podcategories');
+        Schema::dropIfExists('tovar');
     }
 }

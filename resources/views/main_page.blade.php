@@ -30,13 +30,26 @@
                     <li class="active"><a href="{{url('/')}}">ДОМОЙ</a></li>
                     <li><a class="drop" href="{{url('products')}}">ТОВАРЫ</a>
                         <ul>
-                            <li><a class="drop" href="">Товар1</a>
+                        @foreach($categories as $category)
+                        <li><a class="drop" href="{{url('/products/'.$category->id)}}">{{$category->name}}</a>
+                            @if(count($category->tovar_podcategories))
                                 <ul>
-                                    <li href="" ><a>Подтовар</a></li>
+                                    @foreach($category->tovar_podcategories as $podcategory)
+                                        <li><a class="drop" href="{{url('/products/'.$category->id.'/'.$podcategory->id)}}">{{$podcategory->name}}</a>
+                                            @if(count($podcategory->tovars))
+                                                <ul>
+                                                    @foreach($podcategory->tovars as $tovar)
+                                                        <li><a href="{{url('/products/'.$category->id.'/'.$podcategory->id.'/'.$tovar->id)}}">{{$tovar->name}}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
+                                    @endforeach
                                 </ul>
-                            </li>
+                            @endif
+                        </li>
+                        @endforeach
                         </ul>
-                    </li>
                     <li><a class="drop" href="{{url('products')}}">УСЛУГИ</a>
                         <ul>
                             <li><a class="drop" href="">Услуга 1</a>

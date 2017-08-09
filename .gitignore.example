@@ -18,3 +18,5 @@
 /public/tumar.key
 /public/tumarr.crt
 /public/tumarr.key
+/public/build/rev-manifest.json
+.DS-Store
