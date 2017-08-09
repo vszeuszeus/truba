@@ -178,7 +178,7 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 #breadcrumb ul{margin:0; padding:0; list-style:none;}
 #breadcrumb li{display:inline-block; margin:0 6px 0 0; padding:0;}
 #breadcrumb li a{display:block; position:relative; margin:0; padding:0 12px 0 0; font-size:12px;}
-#breadcrumb li a::after{top:5px; right:0; content:"\f101";}
+#breadcrumb li a::after{top:1px; right:0; content:"\f101";}
 #breadcrumb li:last-child a{margin:0; padding:0;}
 #breadcrumb li:last-child a::after{display:none;}
 
@@ -267,7 +267,7 @@ article:hover .icon{border-color:inherit; color:#FFFFFF; background-color:#33333
 /* Rows */
 .row0{color:#FFFFFF; background-color:#44494C;}
 .row1{color:#333335; background-color:#FFFFFF;}
-.row2{color:#333335; background-color:#F3F3F3;}
+.row2{color:#333335; background-color:#D6D6D6;}
 .row3{color:#333335; background-color:#FFFFFF;}
 .row4{color:#B0B0B0; background-color:#44494C;}
 .row5, .row5 a{color:#B0B0B0; background-color:#333335;}
@@ -308,7 +308,7 @@ article:hover .icon{border-color:inherit; color:#FFFFFF; background-color:#33333
 #mainav li li:hover > a, #mainav .active .active > a{color:#FFFFFF; background-color:#E84C3D;}
 #mainav form select{color:#FFFFFF; background-color:#333335;}
 
-#breadcrumb a{color:#888888; background-color:inherit;}
+#breadcrumb a{color:#333335; background-color:inherit;}
 #breadcrumb li:last-child a{color:#E84C3D;}
 
 .container .sidebar nav a{color:inherit; border-color:#D7D7D7;}
@@ -318,6 +318,12 @@ article:hover .icon{border-color:inherit; color:#FFFFFF; background-color:#33333
 .pagination .current *{color:#FFFFFF; background-color:#E84C3D;}
 
 #backtotop{color:#FFFFFF; background-color:#E84C3D;}
+
+.active_url
+{
+	color:#E84C3D!important;
+}
+
 
 .wrapper.style2 {
 	background-color: #3498db;

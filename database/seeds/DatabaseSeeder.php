@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TovarCategSeed::class);
         $this->call(TovarPodCategSeed::class);
         $this->call(TovarSeed::class);
+        $this->call(ServiceCategSeed::class);
+
 
 
 

@@ -30,33 +30,40 @@
                     <li class="active"><a href="{{url('/')}}">ДОМОЙ</a></li>
                     <li><a class="drop" href="{{url('products')}}">ТОВАРЫ</a>
                         <ul>
-                        @foreach($categories as $category)
-                        <li><a class="drop" href="{{url('/products/'.$category->id)}}">{{$category->name}}</a>
-                            @if(count($category->tovar_podcategories))
-                                <ul>
-                                    @foreach($category->tovar_podcategories as $podcategory)
-                                        <li><a class="drop" href="{{url('/products/'.$category->id.'/'.$podcategory->id)}}">{{$podcategory->name}}</a>
-                                            @if(count($podcategory->tovars))
-                                                <ul>
-                                                    @foreach($podcategory->tovars as $tovar)
-                                                        <li><a href="{{url('/products/'.$category->id.'/'.$podcategory->id.'/'.$tovar->id)}}">{{$tovar->name}}</a></li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </li>
-                        @endforeach
-                        </ul>
-                    <li><a class="drop" href="{{url('products')}}">УСЛУГИ</a>
-                        <ul>
-                            <li><a class="drop" href="">Услуга 1</a>
-                                <ul>
-                                    <li href="" ><a>Подуслуга</a></li>
-                                </ul>
+                            @foreach($categories as $category)
+                            <li><a class="drop" href="{{url('/products/'.$category->id)}}">{{$category->name}}</a>
+                                @if(count($category->tovar_podcategories))
+                                    <ul>
+                                        @foreach($category->tovar_podcategories as $podcategory)
+                                            <li><a class="drop" href="{{url('/products/'.$category->id.'/'.$podcategory->id)}}">{{$podcategory->name}}</a>
+                                                @if(count($podcategory->tovars))
+                                                    <ul>
+                                                        @foreach($podcategory->tovars as $tovar)
+                                                            <li><a href="{{url('/products/'.$category->id.'/'.$podcategory->id.'/'.$tovar->id)}}">{{$tovar->name}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
                             </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li><a class="drop" href="{{url('services')}}">УСЛУГИ</a>
+                        <ul>
+                            @foreach($category_serv as $category2)
+                                @if(count($category2->services))
+                                    <li><a class="drop" href="{{url('/services/'.$category2->id)}}">{{$category2->name}}</a>
+                                         <ul>
+                                            @foreach($category2->services as $service)
+                                                 <li><a href="{{url('/services/'.$category2->id.'/'.$service->id)}}">{{$service->name}}</a></li>
+                                             @endforeach
+                                         </ul>
+                                    </li>
+                                @endif
+                            @endforeach
                         </ul>
                     </li>
                     <li class=""><a href="#obr_link">Обратная связь</a></li>
@@ -96,7 +103,7 @@
     @yield('sections')
     <!-- Scripts -->
 
-    <div class="wrapper row3">
+    <div style="background:#d6d6d6;" class="wrapper row3">
         <div class="hoc container clear">
             <!-- ################################################################################################ -->
             <div class="group">
@@ -107,8 +114,8 @@
                     <form id="newsletter" method="post" action="#">
                         <fieldset>
                             <legend>ФОРМА ОБРАТНОЙ СВЯЗИ:</legend>
-                            <input class="btmspace-15" type="text" value="" placeholder="Name" name="name">
-                            <input class="btmspace-15" type="text" value="" placeholder="Email" name="email">
+                            <input class="btmspace-15" type="text" value="" placeholder="Ваше Имя" name="name">
+                            <input class="btmspace-15" type="text" value="" placeholder="Ваш Электронный Адрес" name="email">
                             <button type="submit" value="submit">Отправить</button>
                         </fieldset>
                     </form>
@@ -144,7 +151,7 @@
                 <h6 class="title">КАРТА САЙТА</h6>
                 <ul style="text-align:right;" class="nospace linklist2">
                     <li style="padding-bottom:6px;"><a href="#">Главная</a></li>
-                    <li style="padding-bottom:6px;"><a href="#">Продукты</a></li>
+                    <li style="padding-bottom:6px;"><a href="#">Товары</a></li>
                     <li style="padding-bottom:6px;"><a href="#">Услуги</a></li>
                     <li style="padding-bottom:6px;"><a href="#">Преимущества</a></li>
                     <li style="padding-bottom:6px;"><a href="#">Команда</a></li>

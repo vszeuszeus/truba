@@ -15,19 +15,16 @@ class ServiceCategoryController extends Controller
 
     public function index_category(Service_category $service_category)
     {
-
-        return view('pages.services', [
-            'service_category' => $service_category->load('services')->get()
+        return view('podpages.services', [
+            'service_category' => $service_category->load('services')
         ]);
     }
 
     public function index_service(Service_category $service_category, Service $service)
     {
-
-        return view('pages.services', [
+        return view('podpages.service', [
             'service_category' => $service_category,
             'service' => $service
-
         ]);
     }
 }

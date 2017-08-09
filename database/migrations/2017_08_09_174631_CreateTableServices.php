@@ -18,6 +18,8 @@ class CreateTableServices extends Migration
             $table->string('name', 255);
             $table->string('name_eng', 255);
             $table->string('description', 255);
+            $table->integer('service_category_id')->unsigned();
+            $table->foreign('service_category_id')->references('id')->on('service_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

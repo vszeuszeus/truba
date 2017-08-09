@@ -27,11 +27,11 @@ Route::get('/products/{tovar_category}/{tovar_podcategory}/{tovar}', 'ProductCon
 
 
 
-Route::get('/services', 'ServiceController@index');
+Route::get('/services', 'ServiceCategoryController@index');
 
-Route::get('/services/{service_category}', 'ProductController@index_category');
+Route::get('/services/{service_category}', 'ServiceCategoryController@index_category');
 
-Route::get('/services/{service_category}/{service}', 'ProductController@index_service');
+Route::get('/services/{service_category}/{service}', 'ServiceCategoryController@index_service');
 
 
 
