@@ -8,6 +8,7 @@ use App\Service;
 
 class ServiceCategoryController extends Controller
 {
+
     public function index()
     {
         return view('podpages.services_categories');
@@ -27,4 +28,5 @@ class ServiceCategoryController extends Controller
             'service' => $service
         ]);
     }
+
 }

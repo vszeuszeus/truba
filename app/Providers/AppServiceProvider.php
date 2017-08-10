@@ -21,7 +21,6 @@ class AppServiceProvider extends ServiceProvider
         $category_serv = Service_category::with('services')->get();
         view()->share('categories', $categories);
         view()->share('category_serv', $category_serv);
-
     }
 
     /**
