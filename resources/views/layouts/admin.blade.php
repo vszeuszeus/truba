@@ -35,8 +35,8 @@
 
     <!-- Scripts -->
     <!-- Scripts -->
-    <script src="{{secure_url('js/admin/libs.min.j')}}s"></script>
-    <script src="{{secure_url('js/admin/common.min.js')}}"></script>
+    <script src="{{url('js/admin/libs.min.j')}}s"></script>
+    <script src="{{url('js/admin/common.js')}}"></script>
 
 </body>
 </html>

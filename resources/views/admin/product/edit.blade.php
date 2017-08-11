@@ -59,27 +59,38 @@
         <div class="frame_admin">
             <h3 class="title_frame_admin">
                 Добавление товара
-            </h3><br><br>
+            </h3><br>
             @include('common.errors')
             @include('common.session_message')
-            <form method="POST" action="{{url('/admin/product/store')}}">
+            <form method="POST" action="{{url('/admin/product/update')}}">
                 {{csrf_field()}}
+                <img style="width:200px; height:200px;" src="{{secure_asset($tovar->path or '/public/img/no-avatar.png')}}"/><br><br>
                 <div class="input-field">
-                    <input id="tovar_name" name="tovar_name" type="text"/>
-                    <label style="color:#1a4774;" for="tovar_name">Наименование товара</label>
+                    <input id="tovar_name" name="name" type="text" value="{{$tovar->name}}"/>
+                    <label for="tovar_name">Наименование товара</label>
                 </div>
+
 
                 <label style="color:#1a4774;">Категория товара:</label>
                 <select style="display:block; border:1px solid black;" id="tovar_category" name="tovar_category" >
                     <option value="" disabled selected>Выберите категорию</option>
                     @foreach($categories as $tovar_category)
-                        <option value="{{$tovar_category->id}}">{{$tovar_category->name}}</option>
+                        <option @if($tovar_category->id == $tovar->tovar_podcategory->tovar_category->id) selected @endif value="{{$tovar_category->id}}">{{$tovar_category->name}}</option>
                     @endforeach
                 </select><br>
 
                 <div id="tovar_podcategories" class="input-field">
+                    <select style="display:block; border:1px solid black;">
+                        @foreach($categories as $tovar_category2)
+                            @if($tovar_category2->id == $tovar->tovar_podcategory->tovar_category->id)
+                                @foreach($tovar_category2->tovar_podcategories as $tovar_podcategory)
+                                    <option @if($tovar_podcategory->id == $tovar->tovar_podcategory_id) selected @endif value="{{$tovar_podcategory->id}}">{{$tovar_podcategory->name}}</option>
+                                @endforeach
+                            @endif
+                        @endforeach
+                    </select>
+                </div><br>
 
-                </div>
 
                 <div class="file-field input-field">
                     <div class="btn">
@@ -92,12 +103,12 @@
                 </div>
                 <br>
                 <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea" name="description"></textarea>
+                    <textarea id="textarea1" class="materialize-textarea" name="description">{{$tovar->description}}</textarea>
                     <label for="textarea1">Описание товара</label>
                 </div>
 
-                <button class="btn waves-effect waves-light" type="submit" name="action">Добавить
-                    <i class="material-icons right">add</i>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Сохранить
+                    <i class="material-icons right">save</i>
                 </button>
 
                 <?php print "<script>var categories = " . $categories . ";</script>"; ?>

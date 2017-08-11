@@ -22,7 +22,6 @@ class AuthServiceProvider extends ServiceProvider
         /*'App\Model' => 'App\Policies\ModelPolicy',
         'App\User_request' => 'App\Policies\UserRequestPolicy.php',
         'App\House' => 'App\Policies\HousePolicy.php' */
-        House::class => HousePolicy::class,
         User::class => UserPolicy::class,
         User_request::class => UserRequestPolicy::class,
     ];

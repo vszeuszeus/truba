@@ -65,7 +65,7 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('create','ProductController@create');
             Route::post('store/{tovar_category}','ProductController@store');
             Route::get('edit/{tovar_category}','ProductController@edit');
-            Route::get('update/{tovar_category}','ProductController@update');
+            Route::post('update/{tovar_category}','ProductController@update');
             Route::get('destroy/{tovar_category}','ProductController@destroy');
         });
 
@@ -74,17 +74,17 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('create','ProductController@create');
             Route::post('store/{tovar_podcategory}','ProductController@store');
             Route::get('edit/{tovar_podcategory}','ProductController@edit');
-            Route::get('update/{tovar_podcategory}','ProductController@update');
+            Route::post('update/{tovar_podcategory}','ProductController@update');
             Route::get('destroy/{tovar_podcategory}','ProductController@destroy');
         });
 
         Route::group(['prefix' => 'product'], function(){
             Route::get('show','ProductController@show');
             Route::get('create','ProductController@create');
-            Route::post('store/{tovar_podcategory}','ProductController@store');
-            Route::get('edit/{tovar_podcategory}','ProductController@edit');
-            Route::get('update/{tovar_podcategory}','ProductController@update');
-            Route::get('destroy/{tovar_podcategory}','ProductController@destroy');
+            Route::post('store','ProductController@store');
+            Route::get('edit/{tovar}','ProductController@edit');
+            Route::post('update/{tovar}','ProductController@update');
+            Route::get('destroy/{tovar}','ProductController@destroy');
         });
 
 
