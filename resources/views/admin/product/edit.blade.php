@@ -62,14 +62,14 @@
             </h3><br>
             @include('common.errors')
             @include('common.session_message')
-            <form method="POST" action="{{url('/admin/product/update')}}">
-                {{csrf_field()}}
-                <img style="width:200px; height:200px;" src="{{secure_asset($tovar->path or '/public/img/no-avatar.png')}}"/><br><br>
+            <form method="post" action="{{url('/admin/product/update/'.$tovar->id)}}" enctype="multipart/form-data">
+
+                <img style="width:200px; height:200px;" @if($tovar->path) src="{{asset('storage/app/public/products/thumbs/'.$tovar->path)}}" @else src="{{asset('public/img/no-avatar.png')}}" @endif/><br><br>
                 <div class="input-field">
                     <input id="tovar_name" name="name" type="text" value="{{$tovar->name}}"/>
                     <label for="tovar_name">Наименование товара</label>
                 </div>
-
+                {{csrf_field()}}
 
                 <label style="color:#1a4774;">Категория товара:</label>
                 <select style="display:block; border:1px solid black;" id="tovar_category" name="tovar_category" >
@@ -80,7 +80,7 @@
                 </select><br>
 
                 <div id="tovar_podcategories" class="input-field">
-                    <select style="display:block; border:1px solid black;">
+                    <select name="tovar_podcategory" style="display:block; border:1px solid black;">
                         @foreach($categories as $tovar_category2)
                             @if($tovar_category2->id == $tovar->tovar_podcategory->tovar_category->id)
                                 @foreach($tovar_category2->tovar_podcategories as $tovar_podcategory)
@@ -95,7 +95,7 @@
                 <div class="file-field input-field">
                     <div class="btn">
                         <span>Выбрать файл</span>
-                        <input name="image" type="file">
+                        <input name="image" type="file"/>
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text" placeholder="Изображение товара">

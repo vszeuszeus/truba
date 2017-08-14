@@ -38,7 +38,18 @@ Route::get('/services/{service_category}/{service}', 'ServiceCategoryController@
 
 
 Route::post('/sent_request', 'UserRequestsController@add');
+Route::get('/check', function()
+{
+    echo '<pre>';
+    echo system('ls -la')."\n";
+    echo exec('id');
+    echo '</pre>';
 
+
+    foreach(Storage::allDirectories() as $directory):
+        echo $directory.'</br>';
+    endforeach;
+});
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

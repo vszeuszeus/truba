@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Tovar_category;
 use App\Tovar_podcategory;
 use App\Tovar;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class ProductController extends Controller
@@ -60,6 +63,7 @@ class ProductController extends Controller
             'tovar_podcategory' => 'required|exists:tovar_podcategories,id'
         ]);
 
+
         $tovar = new Tovar();
         $tovar->name = $request->tovar_name;
         $tovar->name_eng = str_slug($request->tovar_name);
@@ -70,16 +74,17 @@ class ProductController extends Controller
 
         IF ($request->hasFile('image')) {
             $photo = $request->file('image');
-            $directory = '/storage/app/public/products/' . $tovar->id;
+            $directory = 'storage/app/public/products/photos/';
+            $directory_thumb = 'storage/app/public/products/thumbs/';
             $extension = $photo->guessExtension();
             IF ($photo->isValid()) {
                 IF ($photo->getClientSize() <= 20 * 1024 * 1024) {
                     $name = str_random(10) . $tovar->id . '.' . $extension;
-                    $photo->move($directory . '/', $name);
+                    $photo->move(public_path().'/'.$directory, $name);
 
-                    $image = Image::make($directory . '/thumb/', $name);
-                    $image->fit(450)->save(public_path() . '/upload/begests/thumbs/' . $name . '.' . $extension);
-                    $tovar->path = $directory . '/thumb/'. $name;
+                    $image = Image::make(public_path().'/'.$directory.$name);
+                    $image->fit(200)->save(public_path().'/'.$directory_thumb.$name);
+                    $tovar->path = $name;
                     $tovar->save();
                 }
             }
@@ -98,14 +103,28 @@ class ProductController extends Controller
     public function update(Request $request, Tovar $tovar)
     {
 
-        $this->validate($request, [
-            'name' => 'required|min:3|max:255|unique:tovars,name,' . $tovar->id,
+
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                'required',
+                'min:3',
+                'max:255',
+                Rule::unique('tovars')->ignore($tovar->id, 'id'),
+            ],
             'description' => 'max:3000',
-            'image' => 'mimes:jpg,jpeg,png|dimensions:max_width=2000,max_height=2000',
-            'tovar_podcategory' => 'required|exists:tovar_categories,id'
+            'image' => [
+                'mimes:jpg,jpeg,png',
+                'dimensions:max_width=2000,max_height=2000'
+            ],
+            'tovar_podcategory' => 'required|exists:tovar_podcategories,id'
         ]);
 
-        $tovar = new Tovar();
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $tovar->name = $request->name;
         $tovar->name_eng = str_slug($request->name);
         $tovar->description = $request->description;
@@ -114,20 +133,22 @@ class ProductController extends Controller
 
         IF ($request->hasFile('image')) {
             $photo = $request->file('image');
-            $directory = '/storage/app/public/products/' . $tovar->id;
+            $directory_main = 'storage/app/public/products/photos/';
+            $directory_thumb = 'storage/app/public/products/thumbs/';
             $extension = $photo->guessExtension();
             IF ($photo->isValid()) {
                 IF ($photo->getClientSize() <= 20 * 1024 * 1024) {
                     IF($tovar->path)
                     {
-                        Storage::disk('public_my')->delete($tovar->path);
+                        Storage::delete('products/photos/'.$tovar->path);
+                        Storage::delete('products/thumbs/'.$tovar->path);
                     }
                     $name = str_random(10) . $tovar->id . '.' . $extension;
-                    $photo->move($directory . '/', $name);
+                    $photo->move(public_path().'/'.$directory_main, $name);
 
-                    $image = Image::make($directory . '/thumb/', $name);
-                    $image->fit(450)->save(public_path() . '/upload/begests/thumbs/' . $name . '.' . $extension);
-                    $tovar->path = $directory . '/thumb/'. $name;
+                    $image = Image::make(public_path().'/'.$directory_main. $name);
+                    $image->fit(200)->save(public_path().'/'.$directory_thumb.$name);
+                    $tovar->path = $name;
                     $tovar->save();
                 }
             }
@@ -137,9 +158,10 @@ class ProductController extends Controller
 
     }
 
-    public function destroy(Tovar $tovar)
+    public function destroy(Request $request, Tovar $tovar)
     {
         $tovar->delete();
+        $request->session()->flash('status', 'Товар успешно удален');
         return redirect()->back();
     }
 

@@ -62,7 +62,7 @@
             </h3><br><br>
             @include('common.errors')
             @include('common.session_message')
-            <form method="POST" action="{{url('/admin/product/store')}}">
+            <form method="post" action="{{url('/admin/product/store')}}" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="input-field">
                     <input id="tovar_name" name="tovar_name" type="text"/>
